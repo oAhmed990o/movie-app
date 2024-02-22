@@ -1,18 +1,36 @@
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Image, useWindowDimensions } from 'react-native';
 import React from 'react';
 
-export default OnboardingItem = () => {
+export default OnboardingItem = ({item, index, slides}) => {
+
+    const {width} = useWindowDimensions();
+
+    const itemWidth = width;
+    const imageWidth = itemWidth * 0.5;
+    const getPreviousIndex = (index) => (index - 1 > 0 ? index - 1 : index);
+    const getNextIndex = (index, length) => (index + 1 < length ? index + 1 : index);
+
   return (
-    <View style={styles.container}>
-      <Text>OnboardingItem</Text>
+    <View style={[styles.container, {width: itemWidth}]}>
+      <Image source={slides[getPreviousIndex(index, slides.length)].image} style={[styles.image, { width: imageWidth, resizeMode: 'contain' }]} />
+      <Image source={item.image} style={[styles.image, {width: imageWidth, resizeMode: 'contain', marginHorizontal: '10px'}]}/>
+      <Image source={slides[getNextIndex(index, slides.length)].image} style={[styles.image, { width: imageWidth, resizeMode: 'contain' }]} />
     </View>
   )
 }
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        flexDirection: 'row',
         justifyContent: 'center',
-        alignItems: 'center'
-    }
+        alignItems: 'center',
+    },
+
+    image: {
+        height: '100%',
+        resizeMode: 'cover',
+        borderRadius: 10,
+        // margin: '10px',
+    },
+
 });
