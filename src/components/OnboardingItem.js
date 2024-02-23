@@ -13,7 +13,7 @@ export default OnboardingItem = ({item, index, slides}) => {
   return (
     <View style={[styles.container, {width: itemWidth}]}>
       <Image source={slides[getPreviousIndex(index, slides.length)].image} style={[styles.image, { width: imageWidth, resizeMode: 'contain' }]} />
-      <Image source={item.image} style={[styles.image, {width: imageWidth, resizeMode: 'contain', marginHorizontal: '10px'}]}/>
+      <Image source={item.image} style={[styles.image, {width: imageWidth, resizeMode: 'contain', margin: 10}]}/>
       <Image source={slides[getNextIndex(index, slides.length)].image} style={[styles.image, { width: imageWidth, resizeMode: 'contain' }]} />
     </View>
   )
@@ -27,10 +27,7 @@ const styles = StyleSheet.create({
     },
 
     image: {
-        height: '100%',
-        resizeMode: 'cover',
-        borderRadius: 10,
-        // margin: '10px',
+        resizeMode: 'cover'
     },
 
 });

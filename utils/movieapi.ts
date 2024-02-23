@@ -9,6 +9,8 @@ const nowPlaying = `${BASE_URL}/movie/now_playing?api_key=${API_KEY}`;
 const upcoming = `${BASE_URL}/movie/upcoming?api_key=${API_KEY}`;
 const topRated = `${BASE_URL}/movie/top_rated?api_key=${API_KEY}`;
 
+
+const movieSearch = (query: string) => `${BASE_URL}search/movie?query=${query}&api_key=${API_KEY}`;
 const movieDetails = (id: string) => `${BASE_URL}/movie/${id}?api_key=${API_KEY}`;
 
 const movieApiCall = async (endpoints: string, params?: {}) => {
@@ -41,6 +43,10 @@ export const fetchUpcoming = () => {
 
 export const fetchTopRated = () => {
   return movieApiCall(topRated);
+};
+
+export const fetchMovieSearch = (query: string) => {
+  return movieApiCall(movieSearch(query));
 };
 
 export const fetchMovieDetails = (id: string) => {
