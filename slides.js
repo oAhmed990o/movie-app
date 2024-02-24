@@ -1,24 +1,41 @@
-import { fetchPopular } from './utils/movieapi';
+import { fetchPopular, fetchNowPlaying, fetchUpcoming, fetchTopRated } from './utils/movieapi';
 
 const BASE_URL = 'https://image.tmdb.org/t/p/w500';
 
-export const popularSlides = [];
+const popularSlides = [];
+const nowPlayingSlides = [];
+const upcomingSlides = [];
+const topRatedSlides = [];
 
-fetchPopular()
-    .then(res => {
-        const movies = res["results"];
-        movies.forEach(movie => {
-            // console.log(movie["original_title"]);
-            popularSlides.push(
-                {
-                    id: movie["id"],
-                    name: movie["original_title"],
-                    imageUrl: `${BASE_URL}${movie["poster_path"]}`, 
-                }
-                );
+export const allSlides = [popularSlides, nowPlayingSlides, upcomingSlides, topRatedSlides];
+
+const fetchAndPopulateSlides = async (fetchFunction, slidesArray) => {
+    try {
+      const res = await fetchFunction();
+      const movies = res["results"];
+      movies.forEach(movie => {
+        slidesArray.push({
+          id: movie["id"],
+          title: movie["original_title"],
+          releaseDate: movie["release_date"],
+          language: movie["original_language"],
+          overview: movie["overview"],
+          imageUrl: `${BASE_URL}${movie["poster_path"]}`,
+          backUrl: `${BASE_URL}${movie["backdrop_path"]}`,
         });
-        // console.log(popularSlides);
-    })
-    .catch(error => {
-        console.log('Error fetching popular movies:', error);
-    });
+      });
+    } catch (error) {
+      console.log(`Error fetching movies: ${error}`);
+    }
+  };
+  
+  const fetchSlides = async () => {
+    await Promise.all([
+      fetchAndPopulateSlides(fetchPopular, popularSlides),
+      fetchAndPopulateSlides(fetchNowPlaying, nowPlayingSlides),
+      fetchAndPopulateSlides(fetchUpcoming, upcomingSlides),
+      fetchAndPopulateSlides(fetchTopRated, topRatedSlides),
+    ]);
+  };
+  
+  fetchSlides();
