@@ -10,14 +10,10 @@ import {
     SafeAreaView,
     ImageBackground,
 } from 'react-native';
-import React, { useEffect, useState } from 'react';
-// import {movieData} from '../components/Onboarding';
-// import { useNavigation } from '@react-navigation/native';
 import { useRoute } from '@react-navigation/native';
 
 export default function DetailScreen() {
 
-  // const navigation = useNavigation();
   const route = useRoute();
   const {movieData} = route.params;
 

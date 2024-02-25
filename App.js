@@ -8,13 +8,7 @@ export default function App() {
   return (
     <>
        <QueryClientProvider client={queryClient}>
-              <AppNav/>
-              {/* <TextInput 
-                    placeholder='Search'
-                    style={styles.searchBox}
-                    value={searchQuery}
-                    onChangeText={(query) => handleSearch(query)}
-                /> */}
+          <AppNav/>
         </QueryClientProvider>
     </>
   );

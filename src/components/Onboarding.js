@@ -20,9 +20,24 @@ export default function Onboarding() {
 
     const handleItemPress = (item) => {
         navigation.navigate('DS', {movieData: item});
+        console.log(item)
+    };
+
+    const handleSearchPress = () => {
+        navigation.navigate('SS');
     };
 
     return (
+        <>
+        <TouchableOpacity
+            onPress={() => handleSearchPress()}
+            style={styles.searchTouchable}
+        >
+            <Image
+                source={require('../../assets/images/search.png')}
+                style={styles.searchIcon}
+                />
+        </TouchableOpacity>
     <ScrollView 
         contentContainerStyle={styles.container}
         horizontal={false}
@@ -40,7 +55,7 @@ export default function Onboarding() {
             </Text>
             
             <FlatList style={styles.slideContainer}
-                key={index}
+                // key={index}
                 data={slide}
                 renderItem={({item}) => (
                     <TouchableOpacity
@@ -67,6 +82,7 @@ export default function Onboarding() {
             </SafeAreaView>
             </ImageBackground>
             </ScrollView>
+        </>
             );
         }
         
@@ -81,7 +97,6 @@ const styles = StyleSheet.create({
         borderRadius: 20, 
         margin: 10,
         resizeMode: 'contain',
-        zIndex: 10,
     },
     bg: {
         zIndex: -1,
@@ -90,20 +105,26 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
       },
-      page: {
-        flex: 1,
-        paddingTop: 35,
-        paddingBottom: 35,
-      },
-      searchBox: {
-        width: '95%',
-        padding: 20, 
-        borderColor: '#fff', 
-        backgroundColor: '#e0dede',
-        borderWidth: 1, 
-        borderRadius: 8, 
-        margin: 20,
-        fontSize: 20,
+    page: {
+    flex: 1,
+    paddingTop: 35,
+    paddingBottom: 35,
+    },
+    searchTouchable: {
+    width: 70,
+    height: 70,
+    right: 20,
+    marginTop: 20,
+    position: 'absolute',
+    zIndex: 11,
+    },
+    searchIcon: {
+    width: 70,
+    height: 70,
+    borderRadius: 35,
+    marginTop: 10,
+    position: 'absolute',
+    zIndex: 11,
     },
     category: {
         fontSize: 30,
