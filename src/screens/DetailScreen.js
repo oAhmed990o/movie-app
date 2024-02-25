@@ -10,14 +10,19 @@ import {
 } from 'react-native';
 import React, { useEffect, useState } from 'react';
 // import {movieData} from '../components/Onboarding';
+// import { useNavigation } from '@react-navigation/native';
+import { useRoute } from '@react-navigation/native';
 
-export default function detailScreen({route}) {
+export default function DetailScreen() {
+
+  // const navigation = useNavigation();
+  const route = useRoute();
   const {movieData} = route.params;
-return (
+
+  return (
     <View>
       <ScrollView>
       <Image
-            // key={item.id}
             source={{ uri: movieData.backUrl }}
             style={styles.image}
         />
@@ -35,8 +40,10 @@ return (
 
 const styles = StyleSheet.create({
     image: { 
-        width: '95%', 
-        borderRadius: 5, 
+        // width: '95%',
+        // flex: 1,
+        height: 400,
+        borderRadius: 20, 
         margin: 7, 
         resizeMode: 'cover',
     },
