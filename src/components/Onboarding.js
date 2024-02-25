@@ -11,7 +11,7 @@ import {
     SafeAreaView,
 } from 'react-native';
 import React, { useEffect, useState } from 'react';
-import {allSlides} from '../../slides';
+import {allSlides, slideCategories} from '../../slides';
 import { useNavigation } from '@react-navigation/native';
 
 export default function Onboarding() {
@@ -19,12 +19,14 @@ export default function Onboarding() {
     const navigation = useNavigation();
 
     const handleItemPress = (item) => {
-        // console.log(item);
         navigation.navigate('DS', {movieData: item});
     };
 
     return (
-    <View style={styles.container}>
+    <ScrollView 
+        contentContainerStyle={styles.container}
+        horizontal={false}
+    >
         <ImageBackground
           source={require('../../assets/images/bg.jpg')}
           style={styles.bg}
@@ -32,18 +34,21 @@ export default function Onboarding() {
         <SafeAreaView style={styles.page}>
 
         {allSlides.map((slide, index) => (
+            <>
+            <Text style={styles.category}>
+                {slideCategories[index]}
+            </Text>
+            
             <FlatList style={styles.slideContainer}
                 key={index}
                 data={slide}
                 renderItem={({item}) => (
                     <TouchableOpacity
-                        onPress={() => 
-                            // navigation.navigate("DetailScreen")
-                            handleItemPress(item)
-                            // console.log(item)
-                        }
+                    onPress={() => handleItemPress(item)}
                         
-                        style={{width: 300}}
+                        style={{width: 280, 
+                            height: 400, 
+                        }}
                     >
                         <Image
                             source={{ uri: item.imageUrl }}
@@ -57,23 +62,24 @@ export default function Onboarding() {
                 bounces={false}
                 snapToAlignment="center"
                 />
-                ))}
+            </>
+        ))}
             </SafeAreaView>
             </ImageBackground>
-    </View>
-  );
-}
-
+            </ScrollView>
+            );
+        }
+        
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        flexGrow: 1,
         justifyContent: 'center',
         alignItems: 'center'
     },
     image: { 
         flex: 1,
         borderRadius: 20, 
-        margin: 7, 
+        margin: 10,
         resizeMode: 'contain',
         zIndex: 10,
     },
@@ -98,5 +104,12 @@ const styles = StyleSheet.create({
         borderRadius: 8, 
         margin: 20,
         fontSize: 20,
+    },
+    category: {
+        fontSize: 30,
+        fontWeight: 'bold',
+        color: 'white',
+        marginLeft: 15,
+        marginBottom: 5,
     }
 });

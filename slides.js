@@ -2,12 +2,13 @@ import { fetchPopular, fetchNowPlaying, fetchUpcoming, fetchTopRated } from './u
 
 const BASE_URL = 'https://image.tmdb.org/t/p/w500';
 
+const topRatedSlides = [];
 const popularSlides = [];
 const nowPlayingSlides = [];
 const upcomingSlides = [];
-const topRatedSlides = [];
 
-export const allSlides = [popularSlides, nowPlayingSlides, upcomingSlides, topRatedSlides];
+export const allSlides = [topRatedSlides, popularSlides, nowPlayingSlides, upcomingSlides];
+export const slideCategories = ['Top Rated', 'Popular', 'Now Playing', 'Upcoming'];
 
 const fetchAndPopulateSlides = async (fetchFunction, slidesArray) => {
     try {

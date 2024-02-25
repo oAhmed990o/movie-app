@@ -6,7 +6,9 @@ import {
     useWindowDimensions, 
     TextInput, 
     ScrollView,
-    Text
+    Text, 
+    SafeAreaView,
+    ImageBackground,
 } from 'react-native';
 import React, { useEffect, useState } from 'react';
 // import {movieData} from '../components/Onboarding';
@@ -20,31 +22,71 @@ export default function DetailScreen() {
   const {movieData} = route.params;
 
   return (
-    <View>
-      <ScrollView>
-      <Image
-            source={{ uri: movieData.backUrl }}
-            style={styles.image}
-        />
-        <View>
-            <Text>Title: {movieData.title}</Text>
-            <Text>
-                Release Date: {movieData.releaseDate} . Language: {movieData.language}
-            </Text>
-            <Text>Overview: {movieData.overview}</Text>
-        </View>
-      </ScrollView>
-    </View>
+      <ImageBackground
+          source={require('../../assets/images/bg.jpg')}
+          style={styles.bg}
+      >
+        <ScrollView>
+        <SafeAreaView style={styles.page}>
+          <Image
+              source={{ uri: movieData.backUrl }}
+              style={styles.image}
+          />
+          <View>
+              
+              <Text style={styles.title}>
+                {movieData.title}
+              </Text>
+              
+              <Text style={styles.tinyDetails}>
+                Release Date: {movieData.releaseDate} | Language: {movieData.language}
+              </Text>
+
+              <Text style={styles.overview}>
+                {movieData.overview}
+              </Text>
+
+          </View>
+        </SafeAreaView>
+        </ScrollView>
+      </ImageBackground>
   )
 }
 
 const styles = StyleSheet.create({
     image: { 
-        // width: '95%',
-        // flex: 1,
         height: 400,
         borderRadius: 20, 
-        margin: 7, 
         resizeMode: 'cover',
     },
+    page: {
+      flex: 1,
+      marginTop: 70,
+      marginBottom: 50,
+    },
+    bg: {
+      zIndex: -1,
+      flex: 1,
+      resizeMode: 'crop',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    title: {
+      color: 'white',
+      fontWeight: 'bold',
+      fontSize: 24,
+      margin: 10,
+    },
+    tinyDetails: {
+      color: 'white',
+      fontWeight: 'bold',
+      fontSize: 16,
+      marginLeft: 10,
+    },
+    overview: {
+      color: 'white',
+      fontSize: 20,
+      margin: 10,
+    }
+
 });
