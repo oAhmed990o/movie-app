@@ -1,62 +1,53 @@
-import { 
-    View, 
-    StyleSheet, 
-    FlatList, 
-    Image, 
-    useWindowDimensions, 
-    TextInput, 
-    ScrollView,
-    Text, 
-    SafeAreaView,
-    ImageBackground,
-    TouchableOpacity,
-} from 'react-native';
+import { StyleSheet, FlatList, Image,  TextInput,  SafeAreaView,ImageBackground,TouchableOpacity} from 'react-native';
 import React, {useState, useCallback} from 'react';
-import { useRoute } from '@react-navigation/native';
 import { useNavigation } from '@react-navigation/native';
 import { searchResults, fetchSearch } from '../../slides';
 import { debounce } from "lodash";
 
+interface MovieData {
+    id: number;
+    title: string;
+    releaseDate: string;
+    language: string;
+    overview: string;
+    backUrl: string;
+    imageUrl: string;
+  }
+
 export default function SearchScreen() {
 
-    const navigation = useNavigation();
-    const [res, setResults] = useState([]);
-
-    const handleItemPress = (item) => {
+    const navigation: any = useNavigation();
+    
+    const handleItemPress = (item: MovieData) => {
         navigation.navigate('DS', {movieData: item});
     };
 
-    const handleSearch = (search) => {
+    const handleSearch = (search: string) => {
         if (search && search.length > 2) {
-            fetchSearch(search, res)
-            .then((data) => {
-                if (data && data["results"]) {
-                    setResults(data["results"]);
-                    console.log(data["results"]);
-                }
-            });
+            fetchSearch(search)
         }
       };
     
-    const handleTextDebounce = useCallback(debounce(handleSearch, 400), []);
+    const handleTextDebounce = useCallback(handleSearch, []);
 
   return (
       <ImageBackground
       source={require('../../assets/images/bg.jpg')}
       style={styles.bg}
       >
-        <SafeAreaView style={styles.page}>
+        <SafeAreaView 
+            // style={styles.page}
+        >
           <TextInput 
-            onChangeText={handleTextDebounce}  
+            onChangeText={text => handleTextDebounce(text)}  
             style={styles.searchBox}
             placeholder='Search'
             placeholderTextColor={'gray'}
           />
 
         <FlatList 
-            style={styles.slideContainer}
+            // style={styles.slideContainer}
             data={searchResults}
-            // key={0}
             numColumns={2}
             renderItem={({item}) => (
                 <TouchableOpacity

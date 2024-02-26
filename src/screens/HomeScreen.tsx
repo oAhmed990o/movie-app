@@ -1,26 +1,24 @@
-import { 
-    View, 
-    StyleSheet, 
-    FlatList, 
-    Image, 
-    TextInput, 
-    ScrollView,
-    TouchableOpacity,
-    Text,
-    ImageBackground,
-    SafeAreaView,
-} from 'react-native';
-import React, { useEffect, useState } from 'react';
+import { StyleSheet, FlatList, Image, ScrollView, TouchableOpacity, Text, ImageBackground, SafeAreaView} from 'react-native';
+import React from 'react';
 import {allSlides, slideCategories} from '../../slides';
 import { useNavigation } from '@react-navigation/native';
 
-export default function Onboarding() {
+interface MovieData {
+    id: number;
+    title: string;
+    releaseDate: string;
+    language: string;
+    overview: string;
+    backUrl: string;
+    imageUrl: string;
+  }
 
-    const navigation = useNavigation();
+export default function HomeScreen() {
 
-    const handleItemPress = (item) => {
+    const navigation: any = useNavigation();
+
+    const handleItemPress = (item: MovieData) => {
         navigation.navigate('DS', {movieData: item});
-        console.log(item)
     };
 
     const handleSearchPress = () => {
@@ -54,8 +52,9 @@ export default function Onboarding() {
                 {slideCategories[index]}
             </Text>
             
-            <FlatList style={styles.slideContainer}
-                // key={index}
+            <FlatList 
+                // style={styles.container}
+                key={index}
                 data={slide}
                 renderItem={({item}) => (
                     <TouchableOpacity
