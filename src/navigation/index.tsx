@@ -1,7 +1,7 @@
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import Onboarding from '../components/Onboarding';
+import HomeScreen from '../screens/HomeScreen';
 import DetailScreen from '../screens/DetailScreen';
 import SearchScreen from '../screens/SearchScreen';
 
@@ -14,10 +14,9 @@ export default function AppNav() {
           screenOptions={{
             headerShown: false,
           }}
-          style={{flex: 1,}}
-          initialRouteName="Ob"
+          initialRouteName="HS"
         >
-          <Stack.Screen name="Ob" component={Onboarding} />
+          <Stack.Screen name="HS" component={HomeScreen} />
           <Stack.Screen name="DS" component={DetailScreen} />
           <Stack.Screen name="SS" component={SearchScreen} />
         </Stack.Navigator>
