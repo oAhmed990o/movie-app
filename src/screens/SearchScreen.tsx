@@ -1,34 +1,51 @@
 import { StyleSheet, FlatList, Image,  TextInput,  SafeAreaView,ImageBackground,TouchableOpacity} from 'react-native';
 import React, {useState, useCallback} from 'react';
 import { useNavigation } from '@react-navigation/native';
-import { searchResults, fetchSearch } from '../../slides';
+import { fetchSearch } from '../../slides';
 import { debounce } from "lodash";
+import 'react-native-get-random-values';
+import { v4 as uuidv4 } from 'uuid';
 
-interface MovieData {
+interface Movie {
     id: number;
     title: string;
     releaseDate: string;
     language: string;
     overview: string;
-    backUrl: string;
     imageUrl: string;
+    backUrl: string;
   }
 
 export default function SearchScreen() {
 
     const navigation: any = useNavigation();
-    
-    const handleItemPress = (item: MovieData) => {
+    // searchResults is set in the slides file, yet set here again
+    const [searchResults, setSearchResults] = useState<Movie[]>([]);
+
+
+    const handleItemPress = (item: Movie) => {
         navigation.navigate('DS', {movieData: item});
     };
 
-    const handleSearch = (search: string) => {
+    const handleSearch = async (search: string): Promise<void> => {
         if (search && search.length > 2) {
-            fetchSearch(search)
+            const results: Movie[] = await fetchSearch(search);
+            if (results){
+                setSearchResults(results);
+            } else {
+                setSearchResults([]);
+            }
+        } else {
+            setSearchResults([]);
         }
       };
     
-    const handleTextDebounce = useCallback(handleSearch, []);
+      const handleTextDebounce = useCallback(
+        debounce( (text: string) => {
+            handleSearch(text);
+        }, 300) as (text: string) => void, 
+        [handleSearch]
+        );
 
   return (
       <ImageBackground
@@ -47,10 +64,12 @@ export default function SearchScreen() {
 
         <FlatList 
             // style={styles.slideContainer}
+            // keyExtractor={() => uuidv4()}
             data={searchResults}
             numColumns={2}
             renderItem={({item}) => (
                 <TouchableOpacity
+                    // key={uuidv4()}
                     onPress={() => handleItemPress(item)}
                     style={{width: 240, 
                         height: 350, 

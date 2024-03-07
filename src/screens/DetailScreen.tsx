@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 import { useRoute } from '@react-navigation/native';
 
-interface MovieData {
+interface Movie {
   id: number;
   title: string;
   releaseDate: string;
@@ -25,7 +25,7 @@ interface DetailScreenProps {}
 
 const DetailScreen: React.FC<DetailScreenProps> = () => {
   const route = useRoute();
-  const { movieData } = route.params as { movieData: MovieData };
+  const { movieData } = route.params as { movieData: Movie };
 
   return (
     <ImageBackground

@@ -2,22 +2,23 @@ import { StyleSheet, FlatList, Image, ScrollView, TouchableOpacity, Text, ImageB
 import React from 'react';
 import {allSlides, slideCategories} from '../../slides';
 import { useNavigation } from '@react-navigation/native';
+import { v4 as uuidv4 } from 'uuid';
 
-interface MovieData {
+interface Movie {
     id: number;
     title: string;
     releaseDate: string;
     language: string;
     overview: string;
-    backUrl: string;
     imageUrl: string;
+    backUrl: string;
   }
 
 export default function HomeScreen() {
 
     const navigation: any = useNavigation();
 
-    const handleItemPress = (item: MovieData) => {
+    const handleItemPress = (item: Movie) => {
         navigation.navigate('DS', {movieData: item});
     };
 
@@ -54,11 +55,13 @@ export default function HomeScreen() {
             
             <FlatList 
                 // style={styles.container}
-                key={index}
+                // key={index}
+                // keyExtractor={() => uuidv4()}
                 data={slide}
                 renderItem={({item}) => (
                     <TouchableOpacity
-                    onPress={() => handleItemPress(item)}
+                        // key={uuidv4()}
+                        onPress={() => handleItemPress(item)}
                         
                         style={{width: 280, 
                             height: 400, 
