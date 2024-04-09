@@ -41,7 +41,7 @@ const fetchAndPopulateSlides = async (fetchFunction: () => Promise<{ results: Mo
         backUrl: `${BASE_URL}${movie.backdrop_path}`,
       });
     });
-    console.log(movies[0]);
+    // console.log(movies[0]);
   } catch (error) {
     console.log(`Error fetching movies: ${error}`);
   }

@@ -10,8 +10,8 @@ const upcoming = `${BASE_URL}/movie/upcoming?api_key=${API_KEY}`;
 const topRated = `${BASE_URL}/movie/top_rated?api_key=${API_KEY}`;
 
 
-const movieSearch = (query) => `${BASE_URL}/search/movie?query=${query}&api_key=${API_KEY}`;
-const movieDetails = (id) => `${BASE_URL}/movie/${id}?api_key=${API_KEY}`;
+const movieSearch = (query: string) => `${BASE_URL}/search/movie?query=${query}&api_key=${API_KEY}`;
+const movieDetails = (id: string) => `${BASE_URL}/movie/${id}?api_key=${API_KEY}`;
 
 export const fetchPopular = async () => {
   const response = await axios.get(popular);
@@ -33,12 +33,12 @@ export const fetchTopRated = async () => {
   return response.data;
 };
 
-export const fetchMovieSearch = async (query) => {
+export const fetchMovieSearch = async (query: any) => {
   const response = await axios.get(movieSearch(query));
   return response.data;
 };
 
-export const fetchMovieDetails = async (id) => {
+export const fetchMovieDetails = async (id: any) => {
   const response = await axios.get(movieDetails(id));
   return response.data;
 };
