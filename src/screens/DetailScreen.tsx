@@ -1,16 +1,16 @@
-import React from 'react';
-import { 
-    View, 
-    StyleSheet, 
-    Image, 
-    useWindowDimensions, 
-    TextInput, 
-    ScrollView,
-    Text, 
-    SafeAreaView,
-    ImageBackground,
-} from 'react-native';
-import { useRoute } from '@react-navigation/native';
+import React from "react";
+import {
+  View,
+  StyleSheet,
+  Image,
+  useWindowDimensions,
+  TextInput,
+  ScrollView,
+  Text,
+  SafeAreaView,
+  ImageBackground,
+} from "react-native";
+import { useRoute } from "@react-navigation/native";
 
 interface Movie {
   id: number;
@@ -27,25 +27,19 @@ const DetailScreen = () => {
 
   return (
     <ImageBackground
-      source={require('../../assets/images/bg.jpg')}
+      source={require("../../assets/images/bg.jpg")}
       style={styles.bg}
     >
       <ScrollView>
         <SafeAreaView style={styles.page}>
-          <Image
-            source={{ uri: movieData.backUrl }}
-            style={styles.image}
-          />
+          <Image source={{ uri: movieData.backUrl }} style={styles.image} />
           <View>
-            <Text style={styles.title}>
-              {movieData.title}
-            </Text>
+            <Text style={styles.title}>{movieData.title}</Text>
             <Text style={styles.tinyDetails}>
-              Release Date: {movieData.releaseDate} | Language: {movieData.language}
+              Release Date: {movieData.releaseDate} | Language:{" "}
+              {movieData.language}
             </Text>
-            <Text style={styles.overview}>
-              {movieData.overview}
-            </Text>
+            <Text style={styles.overview}>{movieData.overview}</Text>
           </View>
         </SafeAreaView>
       </ScrollView>
@@ -54,10 +48,10 @@ const DetailScreen = () => {
 };
 
 const styles = StyleSheet.create({
-  image: { 
+  image: {
     height: 400,
-    borderRadius: 20, 
-    resizeMode: 'cover',
+    borderRadius: 20,
+    resizeMode: "cover",
   },
   page: {
     flex: 1,
@@ -67,24 +61,24 @@ const styles = StyleSheet.create({
   bg: {
     zIndex: -1,
     flex: 1,
-    resizeMode: 'crop',
-    alignItems: 'center',
-    justifyContent: 'center',
+    resizeMode: "crop",
+    alignItems: "center",
+    justifyContent: "center",
   },
   title: {
-    color: 'white',
-    fontWeight: 'bold',
+    color: "white",
+    fontWeight: "bold",
     fontSize: 24,
     margin: 10,
   },
   tinyDetails: {
-    color: 'white',
-    fontWeight: 'bold',
+    color: "white",
+    fontWeight: "bold",
     fontSize: 16,
     marginLeft: 10,
   },
   overview: {
-    color: 'white',
+    color: "white",
     fontSize: 20,
     margin: 10,
   },

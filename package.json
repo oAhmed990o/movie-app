@@ -2,7 +2,6 @@
   "name": "movie-app",
   "version": "1.0.0",
   "main": "node_modules/expo/AppEntry.js",
-  "type": "module",
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
@@ -15,12 +14,16 @@
     "@react-navigation/native-stack": "^6.9.18",
     "@react-navigation/stack": "^6.3.23",
     "@tanstack/react-query": "^5.22.2",
+    "@types/bcrypt": "^5.0.2",
     "@types/react": "~18.2.45",
     "axios": "^1.6.7",
+    "bcrypt": "^5.1.1",
+    "cors": "^2.8.5",
     "events": "^3.3.0",
     "expo": "^49.0.23",
     "expo-status-bar": "~1.6.0",
     "express": "^4.19.1",
+    "jsonwebtoken": "^9.0.2",
     "lodash": "^4.17.21",
     "mongoose": "^8.2.3",
     "react": "18.2.0",
@@ -35,7 +38,9 @@
     "@types/lodash": "^4.14.202",
     "@types/react-native": "^0.73.0",
     "@types/react-native-get-random-values": "^1.8.2",
-    "@types/uuid": "^9.0.8"
+    "@types/uuid": "^9.0.8",
+    "nodemon": "^3.1.0",
+    "ts-node": "^10.9.2"
   },
   "private": true
 }
